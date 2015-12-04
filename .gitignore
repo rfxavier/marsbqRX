@@ -5,6 +5,7 @@
 ## Directory-based project format:
 /node_modules
 /dist
+/index.html
 .idea/
 # if you remove the above rule, at least ignore the following:
 
