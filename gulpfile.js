@@ -10,6 +10,7 @@ var imageMin = require('gulp-imagemin');
 var handlebars = require('gulp-compile-handlebars');
 var rename = require('gulp-rename');
 var less = require('gulp-less');
+var autoprefixer = require('gulp-autoprefixer');
 
 var menu = require('./menu.json');
 
@@ -51,6 +52,7 @@ gulp.task('styles', function(){
     gulp.src(['src/styles/main.less'])
         .pipe(sourceMaps.init())
         .pipe(less())
+        .pipe(autoprefixer())
         .pipe(minifyCss())
         .pipe(sourceMaps.write())
         .pipe(gulp.dest('dist/styles'))
