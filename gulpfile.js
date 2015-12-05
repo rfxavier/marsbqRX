@@ -25,7 +25,7 @@ gulp.task('templates', function(){
 
     var options = {
         batch: ['src/templates/partials']
-    }
+    };
 
     return gulp.src(['src/templates/**/*.hbs', '!src/templates/partials/**/*.hbs'])
         .pipe(handlebars(data, options))
@@ -33,14 +33,14 @@ gulp.task('templates', function(){
             path.extname = '.html'
         }))
         .pipe(gulp.dest('./'));
-})
+});
 
 gulp.task('images', function(){
     gulp.src(['src/img/**/*'])
         .pipe(imageMin())
         .pipe(gulp.dest('dist/img'))
         .pipe(browserSync.stream());
-})
+});
 
 gulp.task('scripts', function(){
     var b = browserify({
@@ -51,9 +51,9 @@ gulp.task('scripts', function(){
     b.bundle()
         .pipe(source('main.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourceMaps.init({loadMaps: true}))
         .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
+        .pipe(sourceMaps.write('./'))
         .pipe(gulp.dest('dist/scripts/'))
         .pipe(browserSync.stream());
 });
