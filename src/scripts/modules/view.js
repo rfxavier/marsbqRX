@@ -6,6 +6,38 @@ var helper = require('./helper.js');
 var view = module.exports = {
     init: function() {
         view.showCountdown();
+        view.registerClick();
+    },
+
+    registerClick: function() {
+      var id,
+          listItem = document.querySelectorAll('#menu li');
+
+        for(var i = 0; i< listItem.length; i++) {
+            view.addListener(listItem[i]);
+        }
+    },
+
+    addListener: function(listItem) {
+        listItem.addEventListener('click', function() {
+            id = this.getAttribute('data-id');
+            //set the current menu item
+            helper.setCurrent(+id);
+            //increment that menu item
+            helper.increment();
+            //update the menu item in the view
+            view.updateCount();
+        });
+    },
+
+    updateCount: function() {
+        //get the current menu item
+        var item = helper.getCurrent();
+        //find the li of the current menu item
+        var li = document.querySelector('[data-id="' + item.id + '"]');
+        var count = li.querySelector('.menu-count');
+        //update the count in the view
+        count.innerHTML = item.count;
     },
 
     showCountdown: function () {
